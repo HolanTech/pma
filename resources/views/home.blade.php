@@ -3,7 +3,7 @@
 @section('content')
     <style>
         #map {
-            height: 380px;
+            height: 400px;
         }
     </style>
     <div class="container">
@@ -17,38 +17,46 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center "> <!-- Added margin-top (mt-3) for some spacing -->
+        <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <!-- Use col-md-6 to split the legend into two columns on medium devices and up -->
-                                <ul>
-                                    <li><img src="{{ asset('assets/marker/black.png') }}" width="20px"> <small
-                                            style="color:black">. Customer
-                                            Perusahaan</small></li>
-                                    <li><img src="{{ asset('assets/marker/green.png') }}" width="14px"> <small
-                                            style="color:rgb(19, 255, 19)">. Customer
-                                            Perumahan</small></li>
-                                    <li><img src="{{ asset('assets/marker/red.png') }}" width="16px"> <small
-                                            style="color:red">. Customer
-                                            Site</small></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul>
-                                    <li><small style="color:rgb(19, 255, 19)">Garis Warna Hijau : Kabel Customer</small>
-                                    </li>
-                                    <li><small style="color:red">Garis Warna Merah :Area Relokasi </small></li>
-                                    <li><small style="color:black">Garis Warna Hitam :Kabel Relokasi </small></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <style>
+                            .table-rapat td,
+                            .table-rapat th {
+                                padding: .15rem;
+                                /* Atur padding sesuai kebutuhan */
+                            }
+                        </style>
+                        <table class="table table-borderless table-rapat">
+                            <tbody>
+                                <tr>
+                                    <td style="width:5%"><img src="{{ asset('assets/marker/black.png') }}" width="20px">
+                                    </td>
+                                    <td style="width:45%"><small style="color:black">Customer Perusahaan</small></td>
+                                    <td style="width:15%"><small style="color:rgb(0, 0, 0)">Garis Warna Hitam </small></td>
+                                    <td style="width:40%"><small style="color:rgb(0, 0, 0)">: Kabel Relokasi </small></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ asset('assets/marker/red.png') }}" width="16px"></td>
+                                    <td><small style="color:red">Customer Perumahan</small></td>
+                                    <td><small style="color:red">Garis Warna Merah</small></td>
+                                    <td><small style="color:red">: Area Relokasi</small></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ asset('assets/marker/green.png') }}" width="12px"></td>
+                                    <td><small style="color:rgb(19, 255, 19)">Customer Site</small></td>
+                                    <td><small style="color:rgb(19, 255, 19)">Garis Warna Hijau</small></td>
+                                    <td><small style="color:rgb(19, 255, 19)">: Kabel Customer</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
 @endsection
 
