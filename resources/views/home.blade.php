@@ -31,23 +31,27 @@
                         <table class="table table-borderless table-rapat">
                             <tbody>
                                 <tr>
-                                    <td style="width:5%"><img src="{{ asset('assets/marker/black.png') }}" width="20px">
+                                    <td style="width:3%"><img src="{{ asset('assets/marker/black.png') }}" width="20px">
                                     </td>
-                                    <td style="width:45%"><small style="color:black">Customer Perusahaan</small></td>
+                                    <td style="width:57%"><small style="color:black">Customer Perusahaan</small></td>
                                     <td style="width:15%"><small style="color:rgb(0, 0, 0)">Garis Warna Hitam </small></td>
-                                    <td style="width:40%"><small style="color:rgb(0, 0, 0)">: Kabel Relokasi </small></td>
+                                    <td style="width:35%"><small style="color:rgb(0, 0, 0)">: Kabel Relokasi </small></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/marker/red.png') }}" width="14px"></td>
-                                    <td><small style="color:red">Customer Perumahan</small></td>
-                                    <td><small style="color:red">Garis Warna Merah</small></td>
-                                    <td><small style="color:red">: Area Relokasi</small></td>
+                                    <td style="width:3%"><img src="{{ asset('assets/marker/red.png') }}" width="14px">
+                                    </td>
+                                    <td style="width:57%"><small style="color:red">Customer Perumahan</small></td>
+                                    <td style="width:15%"><small style="color:red">Garis Warna Merah</small></td>
+                                    <td style="width:35%"><small style="color:red">: Area Relokasi</small></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/marker/green.png') }}" width="10px"></td>
-                                    <td><small style="color:rgb(19, 255, 19)">Customer Site</small></td>
-                                    <td><small style="color:rgb(19, 255, 19)">Garis Warna Hijau</small></td>
-                                    <td><small style="color:rgb(19, 255, 19)">: Kabel Customer</small></td>
+                                    <td style="width:3%"><img src="{{ asset('assets/marker/green.png') }}" width="10px">
+                                    </td>
+                                    <td style="width:57%"><small style="color:rgb(19, 255, 19)">Customer Site</small></td>
+                                    <td style="width:15%"><small style="color:rgb(19, 255, 19)">Garis Warna Hijau</small>
+                                    </td>
+                                    <td style="width:35%"><small style="color:rgb(19, 255, 19)">: Kabel Customer</small>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
