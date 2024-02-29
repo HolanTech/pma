@@ -38,13 +38,13 @@
                                     <td style="width:40%"><small style="color:rgb(0, 0, 0)">: Kabel Relokasi </small></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/marker/red.png') }}" width="16px"></td>
+                                    <td><img src="{{ asset('assets/marker/red.png') }}" width="14px"></td>
                                     <td><small style="color:red">Customer Perumahan</small></td>
                                     <td><small style="color:red">Garis Warna Merah</small></td>
                                     <td><small style="color:red">: Area Relokasi</small></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{{ asset('assets/marker/green.png') }}" width="12px"></td>
+                                    <td><img src="{{ asset('assets/marker/green.png') }}" width="10px"></td>
                                     <td><small style="color:rgb(19, 255, 19)">Customer Site</small></td>
                                     <td><small style="color:rgb(19, 255, 19)">Garis Warna Hijau</small></td>
                                     <td><small style="color:rgb(19, 255, 19)">: Kabel Customer</small></td>
