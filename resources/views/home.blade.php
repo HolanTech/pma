@@ -56,17 +56,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet" />
     <script>
+        // Fungsi untuk mendapatkan lokasi saat ini dan memfokuskan peta
+
+
         var map = L.map('map').setView([-6.4043810871534355, 106.87004348081192], 15);
 
-        // Menggunakan tile layer satelit dari Mapbox
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        // Layer tampilan satelit
+        var satellite = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/satellite-v9', // ID untuk tampilan satelit
+            maxZoom: 19,
+            id: 'mapbox/satellite-v9',
             tileSize: 512,
             zoomOffset: -1,
-            accessToken: 'pk.eyJ1IjoiaG9sYW50ZWNoIiwiYSI6ImNsdDVvZHFmaDAyMmQya3B0eWFzMHEzdGYifQ.X0oayz2VsQU132RBaQgzaw' // Ganti dengan API Key Mapbox Anda
-        }).addTo(map);
+            accessToken: 'pk.eyJ1IjoiaG9sYW50ZWNoIiwiYSI6ImNsdDVvZHFmaDAyMmQya3B0eWFzMHEzdGYifQ.X0oayz2VsQU132RBaQgzaw'
+        });
+
+        // Layer tampilan roadmap
+        var roadmap = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 19,
+            id: 'mapbox/streets-v11', // Ganti id untuk tampilan roadmap
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoiaG9sYW50ZWNoIiwiYSI6ImNsdDVvZHFmaDAyMmQya3B0eWFzMHEzdGYifQ.X0oayz2VsQU132RBaQgzaw'
+        });
+
+        // Secara default menampilkan tampilan satelit
+        satellite.addTo(map);
+
+        // Menambahkan kontrol untuk beralih antara satelit dan roadmap
+        var baseMaps = {
+            "Satelit": satellite,
+            "Roadmap": roadmap
+        };
+        L.control.layers(baseMaps).addTo(map);
+
+        // Lanjutkan dengan kode penambahan marker dan polyline Anda di sini...
+
         var blackIcon = L.icon({
             iconUrl: 'assets/marker/black.png',
             iconSize: [9, 15], // size of the icon
@@ -139,6 +165,27 @@
                 icon: redIcon
             }).addTo(map);
         });
+        // Black markers dengan pop-up
+        blackMarkers.forEach(function(point) {
+            var marker = L.marker(point, {
+                icon: blackIcon
+            }).bindPopup('Lokasi: ' + point[0] + ', ' + point[1]).addTo(map);
+        });
+
+
+        // Green markers dengan pop-up
+        greenMarkers.forEach(function(point) {
+            var marker = L.marker(point, {
+                icon: greenIcon
+            }).bindPopup('Lokasi: ' + point[0] + ', ' + point[1]).addTo(map);
+        });
+
+        // Red markers dengan pop-up
+        redMarkers.forEach(function(point) {
+            var marker = L.marker(point, {
+                icon: redIcon
+            }).bindPopup('Lokasi: ' + point[0] + ', ' + point[1]).addTo(map);
+        });
 
 
         // Drawing polylines
@@ -157,8 +204,10 @@
         var group = new L.featureGroup([blackLine, greenLine, redLine]);
         map.fitBounds(group.getBounds());
 
-        var pathPoints = [
+        // Pastikan Leaflet.js sudah diinclude dalam project Anda
 
+        // Definisikan titik-titik untuk polyline
+        var pathPoints = [
             [-6.406230914886554, 106.87008962947885],
             [-6.406470374820399, 106.87039154875188],
             [-6.407044166587772, 106.87060807290715],
@@ -174,18 +223,17 @@
             [-6.405040434884381, 106.8724349092614],
             // Tambahkan lebih banyak titik sesuai kebutuhan
         ];
-        var path2Points = [
 
+        var path2Points = [
             [-6.407454894537179, 106.86831015450299],
             [-6.404213691820096, 106.86925429210166],
             [-6.40353221951535, 106.86940760551637],
             [-6.403499800494956, 106.86933046046761],
             [-6.403041338597384, 106.8694538420856],
             [-6.402969975548593, 106.86924197678343],
-
         ];
-        var pathredPoints = [
 
+        var pathredPoints = [
             [-6.401764793845812, 106.87751429111849],
             [-6.401840185112971, 106.87491973105428],
             [-6.401327524276796, 106.87312933288135],
@@ -193,8 +241,8 @@
             [-6.401101350214882, 106.87190033074567],
             [-6.401297367740997, 106.86983682098703],
             [-6.400633923481131, 106.86900231337263],
-
         ];
+
         var pathgreenPoints = [
             [-6.401657104481575, 106.86986426758016],
             [-6.401745859243947, 106.87009392613353],
@@ -208,26 +256,24 @@
             [-6.404406476029562, 106.87267732662366],
             [-6.404533267859732, 106.8727666382833],
             [-6.404710776369041, 106.87317492015598],
-
             [-6.403493573922712, 106.8733152670497],
             [-6.402961046939847, 106.87311112611339],
             [-6.402821575495397, 106.87387665462465],
             [-6.401959387538585, 106.87386389581613],
             [-6.4019340290472275, 106.8740297603269],
-
         ];
-        var pathgreen2Points = [
 
+        var pathgreen2Points = [
             [-6.401587756567166, 106.87396439556156],
             [-6.401327524276791, 106.87312933288133],
             [-6.4013162380060935, 106.87307719771691],
             [-6.4010339858205665, 106.87289148730643],
             [-6.40130053453338, 106.86994105731063],
-
-
         ];
 
-        // Menggambar garis berdasarkan titik-titik
+
+
+        // Menggambar polyline dan menambahkannya ke peta
         var polyline = L.polyline(pathPoints, {
             color: 'rgb(19, 255, 19)'
         }).addTo(map);
@@ -244,11 +290,38 @@
             color: 'rgb(19, 255, 19)'
         }).addTo(map);
 
-        // Fit map bounds untuk menampilkan semua garis
-        map.fitBounds(polyline.getBounds());
-        map.fitBounds(polyline2.getBounds());
-        map.fitBounds(polyline3.getBounds());
-        map.fitBounds(polyline4.getBounds());
-        map.fitBounds(polyline5.getBounds());
+        // Fit map bounds untuk menampilkan semua polyline bersamaan
+        var group = new L.featureGroup([polyline, polyline2, polyline3, polyline4, polyline5]);
+        map.fitBounds(group.getBounds());
+
+        function locateUser() {
+            map.locate({
+                setView: true,
+                maxZoom: 16
+            });
+        }
+
+        map.on('locationfound', function(e) {
+            L.marker(e.latlng).addTo(map)
+                .bindPopup("Lokasi Anda saat ini").openPopup();
+        });
+
+        map.on('locationerror', function(e) {
+            alert("Lokasi tidak ditemukan. Pastikan Anda telah mengizinkan akses lokasi.");
+        });
+
+        // Tambahkan tombol lokasi
+        var locateButton = L.control({
+            position: 'topleft'
+        });
+
+        locateButton.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+            div.innerHTML =
+                '<button onclick="locateUser()" style="background-color: white; border: none; cursor: pointer;"><i class="fa fa-crosshairs"></i></button>';
+            return div;
+        };
+
+        locateButton.addTo(map);
     </script>
 @endpush
