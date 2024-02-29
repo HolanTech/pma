@@ -10,21 +10,40 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card">
-                    {{-- <div class="card-header">{{ __('Dashboard') }}</div> --}}
-
+                    <!-- Removed the card-header comment to clean up the code. If you want a header, you can uncomment and use it. -->
                     <div class="card-body">
                         <div id="map"></div>
-                        <div>
-                            <ul>
-                                <li><img src="{{ asset('assets/marker/black.png') }}" width="20px"><small>. Customer
-                                        Perusahaan</small></li>
-                                <li><img src="{{ asset('assets/marker/green.png') }}" width="12px"><small>. Customer
-                                        Perumahan</small></li>
-                                <li><img src="{{ asset('assets/marker/red.png') }}" width="14px"><small>. Customer
-                                        Site</small></li>
-
-
-                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center "> <!-- Added margin-top (mt-3) for some spacing -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Use col-md-6 to split the legend into two columns on medium devices and up -->
+                                <ul>
+                                    <li><img src="{{ asset('assets/marker/black.png') }}" width="20px"> <small
+                                            style="color:black">. Customer
+                                            Perusahaan</small></li>
+                                    <li><img src="{{ asset('assets/marker/green.png') }}" width="14px"> <small
+                                            style="color:rgb(19, 255, 19)">. Customer
+                                            Perumahan</small></li>
+                                    <li><img src="{{ asset('assets/marker/red.png') }}" width="16px"> <small
+                                            style="color:red">. Customer
+                                            Site</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><small style="color:rgb(19, 255, 19)">Garis Warna Hijau : Kabel Customer</small>
+                                    </li>
+                                    <li><small style="color:red">Garis Warna Merah :Area Relokasi </small></li>
+                                    <li><small style="color:black">Garis Warna Hitam :Kabel Relokasi </small></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,28 +58,32 @@
     <script>
         var map = L.map('map').setView([-6.4043810871534355, 106.87004348081192], 15);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        // Menggunakan tile layer satelit dari Mapbox
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/satellite-v9', // ID untuk tampilan satelit
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoiaG9sYW50ZWNoIiwiYSI6ImNsdDVvZHFmaDAyMmQya3B0eWFzMHEzdGYifQ.X0oayz2VsQU132RBaQgzaw' // Ganti dengan API Key Mapbox Anda
         }).addTo(map);
-
         var blackIcon = L.icon({
             iconUrl: 'assets/marker/black.png',
-            iconSize: [12, 20], // size of the icon
-            iconAnchor: [6, 20], // point of the icon which will correspond to marker's location
-            popupAnchor: [0, -20] // point from which the popup should open relative to the iconAnchor
+            iconSize: [9, 15], // size of the icon
+            iconAnchor: [4, 15], // point of the icon which will correspond to marker's location
+            popupAnchor: [0, -15] // point from which the popup should open relative to the iconAnchor
         });
 
         var greenIcon = L.icon({
-            iconUrl: 'assets/marker/green.png',
-            iconSize: [12, 20], // size of the icon
-            iconAnchor: [6, 20], // point of the icon which will correspond to marker's location
+            iconUrl: 'assets/marker/green3.png',
+            iconSize: [8, 15], // size of the icon
+            iconAnchor: [4, 15], // point of the icon which will correspond to marker's location
             popupAnchor: [0, -20] // point from which the popup should open relative to the iconAnchor
         });
         var redIcon = L.icon({
             iconUrl: 'assets/marker/red.png',
-            iconSize: [12, 20], // size of the icon
-            iconAnchor: [6, 20], // point of the icon which will correspond to marker's location
+            iconSize: [8, 15], // size of the icon
+            iconAnchor: [4, 15], // point of the icon which will correspond to marker's location
             popupAnchor: [0, -20] // point from which the popup should open relative to the iconAnchor
         });
 
@@ -120,13 +143,13 @@
 
         // Drawing polylines
         var blackLine = L.polyline(blackMarkers, {
-            color: 'green'
+            color: 'rgb(19, 255, 19)'
         }).addTo(map);
         var greenLine = L.polyline(greenMarkers, {
-            color: 'green'
+            color: 'rgb(19, 255, 19)'
         }).addTo(map);
         var redLine = L.polyline(redMarkers, {
-            color: 'green'
+            color: 'rgb(19, 255, 19)'
         }).addTo(map);
 
 
@@ -193,20 +216,32 @@
             [-6.4019340290472275, 106.8740297603269],
 
         ];
+        var pathgreen2Points = [
 
+            [-6.401587756567166, 106.87396439556156],
+            [-6.401327524276791, 106.87312933288133],
+            [-6.4013162380060935, 106.87307719771691],
+            [-6.4010339858205665, 106.87289148730643],
+            [-6.40130053453338, 106.86994105731063],
+
+
+        ];
 
         // Menggambar garis berdasarkan titik-titik
         var polyline = L.polyline(pathPoints, {
-            color: 'green'
+            color: 'rgb(19, 255, 19)'
         }).addTo(map);
         var polyline2 = L.polyline(path2Points, {
-            color: 'green'
+            color: 'rgb(19, 255, 19)'
         }).addTo(map);
         var polyline3 = L.polyline(pathredPoints, {
             color: 'red'
         }).addTo(map);
         var polyline4 = L.polyline(pathgreenPoints, {
-            color: 'green'
+            color: 'black'
+        }).addTo(map);
+        var polyline5 = L.polyline(pathgreen2Points, {
+            color: 'rgb(19, 255, 19)'
         }).addTo(map);
 
         // Fit map bounds untuk menampilkan semua garis
@@ -214,5 +249,6 @@
         map.fitBounds(polyline2.getBounds());
         map.fitBounds(polyline3.getBounds());
         map.fitBounds(polyline4.getBounds());
+        map.fitBounds(polyline5.getBounds());
     </script>
 @endpush
