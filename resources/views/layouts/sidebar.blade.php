@@ -73,13 +73,13 @@
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="fas fa-network-wired nav-icon"></i>
-                                <p>Splice Conflict All Area</p>
+                                <p>Splice Config All Area</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="fas fa-user-friends nav-icon"></i>
-                                <p>Splice Conflict Customer</p>
+                                <p>Splice Config Customer</p>
                             </a>
                         </li>
                     </ul>
