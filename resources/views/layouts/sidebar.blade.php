@@ -92,6 +92,14 @@
                         <p>View On Maps</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/maps" class="nav-link">
+                        <!-- Menggunakan ikon download dengan FontAwesome 5 -->
+                        <i class="nav-icon fas fa-download"></i>
+                        <p>Download App</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
