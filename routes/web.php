@@ -20,6 +20,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
