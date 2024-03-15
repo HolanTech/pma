@@ -52,4 +52,10 @@ class CustomerController extends Controller
             'newStatus' => $newStatus,
         ]);
     }
+    public function showMap()
+    {
+        $customers = Customer::all(); // Ambil semua data customer
+        // dd($customers);
+        return view('customer.map', compact('customers')); // Ganti 'customers.map' dengan path view Anda
+    }
 }

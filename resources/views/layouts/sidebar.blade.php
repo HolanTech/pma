@@ -1,3 +1,8 @@
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link">
@@ -40,14 +45,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <!-- Disini saya mengomentari bagian untuk menu pelanggan, jika diperlukan, bisa di-uncomment -->
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{ route('customer.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-user nav-icon"></i>
                                 <p>Pelanggan</p>
                             </a>
-                        </li> -->
+                        </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('data_otb.site') }}" class="nav-link">
                                 <i class="fas fa-sitemap nav-icon"></i>
                                 <p>OTB perSite N to N</p>
                             </a>
@@ -93,12 +98,24 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('customers.map') }}" class="nav-link">
+                        <i class="nav-icon fas fa-map-marked-alt"></i>
+                        <p>Customer On Maps</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('data_otb.map') }}" class="nav-link">
+                        <i class="nav-icon fas fa-map-marked-alt"></i>
+                        <p>OTB On Maps</p>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a href="/maps" class="nav-link">
                         <!-- Menggunakan ikon download dengan FontAwesome 5 -->
                         <i class="nav-icon fas fa-download"></i>
                         <p>Download App</p>
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
         </nav>
