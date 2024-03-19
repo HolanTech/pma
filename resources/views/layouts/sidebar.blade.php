@@ -104,7 +104,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('data_otb.map') }}" class="nav-link">
+                    <a href="{{ route('data_otb.allsite') }}" class="nav-link">
                         <i class="nav-icon fas fa-map-marked-alt"></i>
                         <p>OTB On Maps</p>
                     </a>

@@ -37,6 +37,7 @@ Route::get('/data-otb', [DataOtbController::class, 'index'])->name('data_otb.ind
 Route::get('/data-otb/get-data', [DataOtbController::class, 'getData'])->name('data_otb.get_data');
 Route::post('/data-otb/store', [DataOtbController::class, 'store'])->name('data_otb.store');
 Route::get('/sata-otb/map', [DataOtbController::class, 'showMap'])->name('data_otb.map');
+Route::get('/sata-otb/allsite', [DataOtbController::class, 'showAllMap'])->name('data_otb.allsite');
 Route::get('asset/index', [AssetController::class, 'index'])->name('asset.index');
 Route::post('asset/store', [AssetController::class, 'store'])->name('asset.store');
 Route::get('/get-image-by-site', [AssetController::class, 'getImageBySite']);
