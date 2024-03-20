@@ -1,47 +1,84 @@
 @extends('layouts.admin')
 
 @section('content')
+    <style>
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+        }
+
+        .card-header {
+            border-radius: 15px 15px 0 0;
+            font-weight: bold;
+        }
+
+        .btn-custom {
+            border-radius: 20px;
+            padding: 10px 80px;
+            font-weight: bold;
+            font-size: 16px;
+            /* Adjust the font size for better readability */
+            margin: 5px;
+            /* Adds some space between buttons */
+        }
+
+        .select2-container--bootstrap4 .select2-selection {
+            border-radius: 20px;
+            height: 38px;
+        }
+
+        .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+            line-height: 36px;
+        }
+
+        .gradient-custom-1 {
+            background: linear-gradient(to right, #2f7af2, #61bfeb);
+        }
+
+        .gradient-custom-2 {
+            background: linear-gradient(to right, #f41bb6, #5a91f0);
+        }
+
+        .gradient-custom-3 {
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+        }
+    </style>
+
     <div class="container mt-3">
         <div class="row">
-            <div class="col-lg-6 mb-3">
+            <div class="col-lg-6">
                 <!-- Card Input Site To Site -->
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5> Input Site To Site</h5>
+                    <div class="card-header gradient-custom-1 text-white">
+                        <h5>Input Site To Site</h5>
                     </div>
                     <div class="card-body">
                         <form id="dynamicForm" action="" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="inputSite1" class="form-label">Site 1</label>
+                                {{-- <div class="my-2">Site 1</div> --}}
                                 <input type="text" class="form-control" id="inputSite1" name="site1"
                                     placeholder="Input Site 1" aria-label="Site 1">
                             </div>
                             <div class="mb-3">
-                                <label for="inputSite2" class="form-label">Site 2</label>
+                                {{-- <div class="my-2">Site 1</div> --}}
                                 <input type="text" class="form-control" id="inputSite2" name="site2"
                                     placeholder="Input Site 2" aria-label="Site 2">
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <button type="button" id="showDataOTB" class="btn btn-success"><i
-                                        class="fas fa-search"></i> Show Data OTB</button>
-                                <button type="button" id="showAssets" class="btn btn-warning"><i
-                                        class="fas fa-briefcase"></i> Show Assets</button>
-                                <button type="button" id="showSpliceConfig" class="btn btn-danger"><i
-                                        class="fas fa-tools"></i> Show Splice Config</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <!-- Card Already Site -->
                 <div class="card">
-                    <div class="card-header bg-gradient-indigo">
+                    <div class="card-header gradient-custom-2 text-white">
                         <h5>Already Site</h5>
                     </div>
                     <div class="card-body">
                         <!-- Dropdown untuk Site1 -->
+                        {{-- <div class="my-2">Site 1</div> --}}
                         <select class="form-control select2" id="alreadySite1" name="alreadySite1"
                             aria-label="Already Site 1">
                             <option value="">Select or Type</option>
@@ -49,10 +86,9 @@
                                 <option value="{{ $site }}">{{ $site }}</option>
                             @endforeach
                         </select>
-
-                        <div class="my-2">TO</div>
-
+                        <br>
                         <!-- Dropdown untuk Site2 -->
+                        {{-- <div class="my-2">Site 2</div> --}}
                         <select class="form-control select2" id="alreadySite2" name="alreadySite2"
                             aria-label="Already Site 2">
                             <option value="">Select or Type</option>
@@ -60,7 +96,23 @@
                                 <option value="{{ $site }}">{{ $site }}</option>
                             @endforeach
                         </select>
+
                     </div>
+                </div>
+            </div>
+
+            <div class="card col-12 mt-0">
+                <div class="card-body d-flex justify-content-between">
+                    <button type="button" id="showDataOTB" class="btn  btn-custom btn-success "><i
+                            class="fas fa-search"></i>
+                        Show Data
+                        OTB</button>
+                    <button type="button" id="showAssets" class="btn  btn-custom btn-warning "><i
+                            class="fas fa-briefcase"></i> Show
+                        Assets</button>
+                    <button type="button" id="showSpliceConfig" class="btn btn-custom  btn-danger "><i
+                            class="fas fa-tools"></i> Show
+                        Splice Config</button>
                 </div>
             </div>
         </div>
@@ -101,7 +153,7 @@
                 } else {
                     alert(
                         "Please fill in both Site 1 and Site 2 fields for other actions, or at least one for Show Assets."
-                        );
+                    );
                 }
             }
 
