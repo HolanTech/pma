@@ -10,55 +10,134 @@
         }
 
         .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: start;
             margin-bottom: 20px;
+            gap: 10px;
+            /* Menambahkan sedikit ruang antar tombol */
         }
 
         .toolbar button,
-        .toolbar input,
+        .toolbar input[type="file"],
+        .toolbar select,
+        .toolbar input[type="color"],
+        .toolbar input[type="text"],
+        .toolbar input[type="range"] {
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            /* Membuat sudut tombol lebih bulat */
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .toolbar button {
+            color: #fff;
+            background-color: #007bff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toolbar input[type="file"] {
+            background-color: #f8f9fa;
+        }
+
+        .toolbar input[type="color"],
+        .toolbar input[type="range"] {
+            padding: 0;
+        }
+
+        .toolbar input[type="text"] {
+            width: auto;
+            /* Memastikan input teks tidak terlalu lebar */
+        }
+
         .toolbar select {
-            margin-right: 5px;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        .toolbar button:hover,
+        .toolbar select:hover,
+        .toolbar input[type="file"]:hover {
+            background-color: #0056b3;
+        }
+
+        .toolbar input[type="color"]:hover,
+        .toolbar input[type="range"]:hover {
+            border: 1px solid #ccc;
         }
 
         .border {
             border: 1px solid #ccc;
         }
+
+        /* Mengatur tampilan icon */
+        .fa {
+            margin-right: 5px;
+        }
     </style>
     <div class="container mt-5">
         <div class="row">
             <div class="d-flex align-items-center justify-content-between col-6">
-                <input type="text" class="form-control me-2" id="inputSite" name="site" placeholder="Masukkan Nama Site"
-                    value="{{ old('site') ? old('site') : $site ?? '' }}">
+                <input type="text" class="form-control me-2" id="inputSite" name="site"
+                    placeholder="Masukkan Nama Site" value="{{ old('site') ? old('site') : $site ?? '' }}">
             </div>
 
             <div class="col-md-12">
-                <div class="mb-3">
-                    <input type="file" id="file" class="btn btn-light">
-                    <button id="clear-canvas" class="btn btn-danger"><i class="fa fa-trash"></i> Clear</button>
-                    <button id="add-text" class="btn btn-info"><i class="fa fa-font"></i> Teks</button>
-                    <select id="font-family" class="btn btn-light">
+                <div class="toolbar mb-3">
+                    <!-- Menyesuaikan tombol dengan desain baru -->
+                    <input type="file" id="file" class="btn btn-light btn-sm">
+                    <button id="clear-canvas" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Clear</button>
+                    <button id="add-text" class="btn btn-info btn-sm"><i class="fa fa-font"></i> Teks</button>
+                    <select id="font-family" class="btn btn-light btn-sm">
                         <option value="Arial">Arial</option>
                         <option value="Helvetica">Helvetica</option>
                         <option value="Times New Roman">Times New Roman</option>
                     </select>
-                    <input type="color" id="text-color" class="btn btn-light">
-                    <button id="draw-line" class="btn btn-primary"><i class="fa fa-pencil-alt"></i> Garis</button>
-                    <button id="add-rect" class="btn btn-secondary"><i class="far fa-square"></i> Persegi</button>
-                    <button id="add-circle" class="btn btn-warning"><i class="far fa-circle"></i> Lingkaran</button>
-                    <button id="add-arrow" class="btn btn-primary"><i class="fas fa-arrow-up"></i> Panah</button>
-                    <button id="add-triangle" class="btn btn-success"><i class="fas fa-play"></i> Segitiga</button>
-                    <button id="group-objects" class="btn btn-dark"><i class="fas fa-object-group"></i> Group</button>
-                    <button id="ungroup-objects" class="btn btn-info"><i class="fas fa-object-ungroup"></i> Ungroup</button>
-                    <input type="color" id="canvas-bg" class="btn btn-light" value="#ffffff"
+                    <input type="color" id="text-color" class="btn btn-light btn-sm">
+                    <button id="draw-line" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i> Garis</button>
+                    <button id="add-rect" class="btn btn-secondary btn-sm"><i class="far fa-square"></i> Persegi</button>
+                    <button id="add-circle" class="btn btn-warning btn-sm"><i class="far fa-circle"></i> Lingkaran</button>
+                    <button id="add-arrow" class="btn btn-primary btn-sm"><i class="fas fa-arrow-up"></i> Panah</button>
+                    <input type="text" id="textForNewArrow" class="form-control form-control-sm"
+                        placeholder="Masukkan teks panah..." style="display: inline-block; width: auto;">
+                    <button id="createArrow" class="btn btn-primary btn-sm">Buat Panah Baru</button>
+                    <button id="add-triangle" class="btn btn-success btn-sm"><i class="fas fa-play"></i> Segitiga</button>
+                    <button id="group-objects" class="btn btn-dark btn-sm"><i class="fas fa-object-group"></i>
+                        Group</button>
+                    <button id="ungroup-objects" class="btn btn-info btn-sm"><i class="fas fa-object-ungroup"></i>
+                        Ungroup</button>
+                    <input type="range" id="opacity-slider" min="0" max="1" step="0.01" value="1"
+                        class="form-range">
+                    <input type="color" id="canvas-bg" class="btn btn-light btn-sm" value="#ffffff"
                         title="Ubah Warna Background">
-                    <input type="color" id="object-color" class="btn btn-light" title="Ubah Warna Objek">
-                    <button id="delete-object" class="btn btn-dark"><i class="fas fa-eraser"></i> Hapus Objek</button>
-                    <button id="save-canvas" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
+                    <input type="color" id="object-color" class="btn btn-light btn-sm" title="Ubah Warna Objek">
+                    <button id="delete-object" class="btn btn-dark btn-sm"><i class="fas fa-eraser"></i> Hapus
+                        Objek</button>
+                    <button id="use-pen" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Pena</button>
+                    <button id="use-brush" class="btn btn-secondary btn-sm"><i class="fas fa-paint-brush"></i> Kuas</button>
+
+                    <button id="bring-to-front" class="btn btn-sm" style="background-color: #28a745; color: white;">Bawa ke
+                        Depan</button>
+                    <button id="send-to-back" class="btn btn-sm" style="background-color: #dc3545; color: white;">Kirim ke
+                        Belakang</button>
+                    <button id="send-forward" class="btn btn-sm"
+                        style="background-color: #ffc107; color: white;">Maju</button>
+                    <button id="send-backward" class="btn btn-sm"
+                        style="background-color: #17a2b8; color: white;">Mundur</button>
+                    <button id="save-canvas" class="btn btn-success btn-sm"><i class="fas fa-save"></i> Simpan</button>
                 </div>
+
                 <canvas id="canvas" width="1100" height="600" class="border"></canvas>
             </div>
         </div>
     </div>
 @endsection
+
 @push('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <script>
@@ -69,6 +148,37 @@
             var canvasData = @json(isset($asset) && !empty($asset->canvasData) ? $asset->canvasData : null);
             canvas.backgroundColor = '#ffffff';
             canvas.renderAll();
+
+
+            canvas.isDrawingMode = 0;
+            canvas.freeDrawingBrush.color = "black";
+            canvas.freeDrawingBrush.width = 1;
+            canvas.renderAll();
+
+            // Fungsi untuk mengaktifkan pena
+            document.getElementById('use-pen').onclick = function() {
+                canvas.isDrawingMode = 1;
+                canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+                canvas.freeDrawingBrush.color = "black";
+                canvas.freeDrawingBrush.width = 1;
+            };
+
+            // Fungsi untuk mengaktifkan kuas
+            document.getElementById('use-brush').onclick = function() {
+                canvas.isDrawingMode = 1;
+                canvas.freeDrawingBrush = new fabric.CircleBrush(canvas);
+                canvas.freeDrawingBrush.color = "black";
+                canvas.freeDrawingBrush.width = 10; // Lebar kuas lebih besar untuk efek kuas
+            };
+
+            // Contoh untuk mengganti warna dan lebar pena/kuas
+            document.getElementById('object-color').onchange = function() {
+                canvas.freeDrawingBrush.color = this.value;
+            };
+
+            document.getElementById('opacity-slider').oninput = function() {
+                canvas.freeDrawingBrush.width = parseInt(this.value, 10);
+            };
 
             function resetCanvasEvents() {
                 canvas.isDrawingMode = false;
@@ -122,6 +232,13 @@
                         fill: document.getElementById('text-color').value
                     });
                     canvas.add(text);
+                });
+                document.getElementById('opacity-slider').addEventListener('change', function() {
+                    var selectedObject = canvas.getActiveObject();
+                    if (selectedObject) {
+                        selectedObject.set('opacity', parseFloat(this.value));
+                        canvas.renderAll();
+                    }
                 });
 
                 document.getElementById('font-family').addEventListener('change', function() {
@@ -280,7 +397,7 @@
                             },
                             body: JSON.stringify({
                                 image: dataURL,
-                                canvas: jsonCanvas, // Kirim sebagai JSON
+                                canvas: jsonCanvas,
                                 site: site
                             })
                         })
@@ -315,6 +432,99 @@
                     }
                 });
             }
+            // var canvas = new fabric.Canvas('c');
+
+            function createDoubleEndedArrowWithDynamicText(text, left = 50, top = 100) {
+                // Panah
+                var line = new fabric.Line([0, 0, 250, 0], {
+                    stroke: 'black',
+                    strokeWidth: 2,
+                    selectable: false,
+                });
+
+                // Segitiga di ujung kiri
+                var triangleLeft = new fabric.Triangle({
+                    width: 20,
+                    height: 20,
+                    fill: 'black',
+                    angle: -90,
+                    left: 0,
+                    top: 10,
+                    selectable: false,
+                });
+
+                // Segitiga di ujung kanan
+                var triangleRight = new fabric.Triangle({
+                    width: 20,
+                    height: 20,
+                    fill: 'black',
+                    angle: 90,
+                    left: 250,
+                    top: -10,
+                    selectable: false,
+                });
+
+                // Teks
+                var dynamicText = new fabric.Text(text, {
+                    fontSize: 20,
+                    left: 125 - (text.length * 5), // Posisi tengah panah, disesuaikan dengan panjang teks
+                    top: -30,
+                    selectable: false,
+                });
+
+                // Mengelompokkan elemen panah dan teks
+                var arrowWithText = new fabric.Group([line, triangleLeft, triangleRight, dynamicText], {
+                    left: left,
+                    top: top,
+                    selectable: true,
+                });
+
+                canvas.add(arrowWithText);
+            }
+
+            // Fungsi untuk membuat panah baru dengan teks dari input
+            document.getElementById('createArrow').addEventListener('click', function() {
+                var newText = document.getElementById('textForNewArrow').value;
+                createDoubleEndedArrowWithDynamicText(newText);
+            });
+
+            document.getElementById('bring-to-front').addEventListener('click', function() {
+                var selectedObject = canvas.getActiveObject();
+                if (selectedObject) {
+                    selectedObject.bringToFront();
+                    canvas.renderAll();
+                }
+            });
+
+            document.getElementById('send-to-back').addEventListener('click', function() {
+                var selectedObject = canvas.getActiveObject();
+                if (selectedObject) {
+                    selectedObject.sendToBack();
+                    canvas.renderAll();
+                }
+            });
+            document.getElementById('send-forward').addEventListener('click', function() {
+                var selectedObject = canvas.getActiveObject();
+                if (selectedObject) {
+                    selectedObject.bringForward();
+                    canvas.renderAll();
+                }
+
+            });
+            document.getElementById('send-backward').addEventListener('click', function() {
+                var selectedObject = canvas.getActiveObject();
+                if (selectedObject) {
+                    selectedObject.sendBackwards();
+                    canvas.renderAll();
+                }
+
+
+            });
+
+            // Tambahkan event listener untuk tombol lainnya sesuai kebutuhan
+
+
+
 
             function loadSavedCanvas() {
                 if (canvasData) {
