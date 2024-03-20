@@ -98,11 +98,21 @@
                     }
                 })
                 .then(function(response) {
-                    alert('Data berhasil disimpan');
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil disimpan.',
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    });
                 })
                 .catch(function(error) {
                     console.error('Error saving data:', error);
-                    alert('Error: ' + (error.response ? error.response.data.message : error.message));
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Terjadi kesalahan saat menyimpan.',
+                        icon: 'error',
+                        confirmButtonText: 'Oke'
+                    });
                 });
         }
     </script>

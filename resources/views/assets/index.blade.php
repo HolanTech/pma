@@ -387,7 +387,7 @@
                         format: 'png',
                         quality: 0.8
                     });
-                    console.log(dataURL);
+
                     fetch('{{ route('asset.store') }}', {
                             method: 'POST',
                             headers: {
@@ -402,8 +402,26 @@
                             })
                         })
                         .then(response => response.json())
-                        .then(data => console.log('Success:', data))
-                        .catch((error) => console.error('Error:', error));
+                        .then(data => {
+                            console.log('Success:', data);
+                            // Tampilkan Sweet Alert setelah berhasil
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: 'Data berhasil disimpan.',
+                                icon: 'success',
+                                confirmButtonText: 'Oke'
+                            });
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            // Tampilkan Sweet Alert untuk error
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Terjadi kesalahan saat menyimpan.',
+                                icon: 'error',
+                                confirmButtonText: 'Oke'
+                            });
+                        });
                 });
 
 
